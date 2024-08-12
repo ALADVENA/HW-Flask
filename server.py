@@ -8,7 +8,6 @@ from models import User, Session
 
 app = Flask('app')
 
-# app.add_url_rule('')
 
 class UserViev(MethodView):
     def get(self, user_id):
@@ -28,5 +27,20 @@ class UserViev(MethodView):
         pass
     def delete(self, user_id):
         pass
+
+user_view = UserView.as_view('user')
+
+app.add_url_rule( 
+    rule: '/user/<int:user_id>', 
+    view_func=user_view, 
+    method=['GET', 'POST', 'DELETE']
+    )
+
+app.add_url_rule( 
+    rule: '/user/<int:user_id>', 
+    view_func=user_view, 
+    method=['POST']
+    )
+
 
 app.run()
