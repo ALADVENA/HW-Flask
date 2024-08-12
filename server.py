@@ -15,14 +15,14 @@ class UserViev(MethodView):
     def post(self, user_id):
         json_data = request.json
         with Session() as session:
-            new_title = User (
+            new_advertisement = User(
                 title = json_data['title']
                 description = json_data['description']
                 owner = json_data['owner']
             )
-            session.add(new_title)
+            session.add(new_advertisement)
             session.commit()
-            return new_title.json()
+            return new_advertisement.json()
         
         pass
     def delete(self, user_id):

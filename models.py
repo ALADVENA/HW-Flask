@@ -1,6 +1,6 @@
 import os
-inport datetime
-from sqlalchemy import create_engine, Integer, String, Datetime
+import datetime
+from sqlalchemy import create_engine, Integer, String, Datetime, func
 from sqlalchemy.org import sessionmaker, DeclarativeBase, mapped_column, Mapped
 
 
@@ -30,7 +30,11 @@ class User(Base):
     registration_time: Mapped[datetime.datetime] = mapped_column(
         DateTime,
 
+        # default=datetime.datetime.now покажет время сервера, но 
+        # оно может по факту отличаться от врмени bd)
+
         server_default=func.now()
+        # указывает время самой db
     )
 
 def json(self):
@@ -40,6 +44,7 @@ def json(self):
         'description': self.description,
         'owner': self.owner,
         'registration_time': self.registration_time.isoformat()
+        # json не поддерживает формат дата -> преобразуем в формат стандартов iso
 
     }
 
