@@ -1,7 +1,7 @@
 import requests as rq
 
 response = rq.post(
-    url: 'http://127.0.0.1:5000',
+    url: 'http://127.0.0.1:5000/user',
     json={
         'title': 'title_1',
         'description': 'description_1',
